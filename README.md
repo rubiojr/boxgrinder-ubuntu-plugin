@@ -14,22 +14,24 @@ Install libguestfs deps first:
 
     $ sudo apt-get install libsys-virt-perl ubuntu-vm-builder libvirt-bin \
                     rubygems libvirt-dev libxslt-dev libxml2-dev gcc make \
-                    ruby-dev qemu-kvm
+                    ruby-dev qemu-kvm augeas-lenses btrfs-tools cryptsetup \
+                    diff jfsutils libaugeas0 libhivex0 libntfs10 ntfsprogs \
+                    reiserfsprogs scrub xfsprogs zerofree zfs-fuse
 
 
 Grab libguestfs binary packages from:
 
 http://libguestfs.org/download/binaries/
 
-Download them and install them issuing the following commands:
+For **Ubuntu Natty**, download them and install them issuing the following commands:
 
-    $ wget febootstrap_3.12-1_amd64.deb \
-           guestmount_1.14.0-1_amd64.deb \
-           libguestfs-dev_1.14.0-1_amd64.deb \
-           libguestfs-perl_1.14.0-1_amd64.deb \
-           libguestfs-tools_1.14.0-1_amd64.deb \
-           libguestfs0_1.14.0-1_amd64.deb \
-           python-guestfs_1.14.0-1_amd64.deb
+    $ wget -r -l1 -H -t1 -nd -N -np -A.deb http://libguestfs.org/download/binaries/ubuntu1104-packages/
+
+Remove not required packages:
+
+    $ rm *ocaml*deb libguestfs-doc* libguestfs0-dbg*
+
+Install libguestfs packages:
 
     $ dpkg -i guestmount* libguestfs* python-guestfs*
 
@@ -39,20 +41,16 @@ There are no binary packages for the libguestfs ruby bindings ATM. Grab the gem 
 
     $ wget http://rbel.frameos.org/tmp/guestfs-1.14.2.gem
 
-    $ gem install --no-ri --no-rdoc guestfs-1.14.2.gem
+    $ sudo gem install --no-ri --no-rdoc guestfs-1.14.2.gem
 
 
-**Install Boxgrinder**
+**Install Boxgrinder and the Ubuntu plugin**
 
-    $ gem install boxgrinder-build
-
-## Install the plugin rubygem
-
-    gem install boxgrinder-ubuntu-plugin
+    $ sudo gem install --no-ri --no-rdoc boxgrinder-build boxgrinder-ubuntu-plugin
 
 ## Usage
 
-    boxgrinder-build -l boxgrinder-ubuntu-plugin myubuntu.appl
+    boxgrinder-build -l boxgrinder-ubuntu-plugin ubuntu.appl
 
 There's a sample appliance definition at:
 
