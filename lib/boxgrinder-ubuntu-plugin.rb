@@ -73,6 +73,10 @@ module BoxGrinder
         FileUtils.mv dsource, ddest
         @log.debug "Ubuntu appliance ready"
       rescue => e
+        @log.error "Could not create the appliance!"
+        @log.error $!
+        @log.error $@
+        abort
       ensure
         #
         # Cleanup
@@ -81,8 +85,10 @@ module BoxGrinder
         # tmp/out dirs (useful for debugging)
         #
         if not ENV["BOXGRINDER_DEBUG_NOCLEAN"]
-          @log.debug "Cleaning tmp/work directories"
-          FileUtils.rm_rf "#{@dir.base}/out" if File.exist? "#{@dir.base}/out"
+          if File.exist? "#{@dir.base}/out"
+            @log.debug "Cleaning work directories"
+            FileUtils.rm_rf "#{@dir.base}/out" 
+          end
         end
       end
     end
