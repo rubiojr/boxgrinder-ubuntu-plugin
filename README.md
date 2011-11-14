@@ -12,7 +12,7 @@ Boxgrinder can be easily installed in Ubuntu via rubygems.
 
 Install libguestfs deps first:
 
-    $ sudo apt-get install libsys-virt-perl ubuntu-vm-builder libvirt-bin \
+    $ sudo apt-get install grub-pc lvm2 watershed dosfstools libsys-virt-perl ubuntu-vm-builder libvirt-bin \
                     rubygems libvirt-dev libxslt-dev libxml2-dev gcc make \
                     ruby-dev qemu-kvm augeas-lenses btrfs-tools cryptsetup \
                     diff jfsutils libaugeas0 libhivex0 libntfs10 ntfsprogs \
