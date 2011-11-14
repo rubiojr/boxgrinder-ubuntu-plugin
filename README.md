@@ -60,6 +60,8 @@ https://github.com/rubiojr/boxgrinder-appliances/tree/master/ubuntu-natty
 
 The Ubuntu plugin is still in alpha stage. If you find issues with it, please mailme, open an issue or submit a pull request ;)
 
+Some stuff (like executing post commands) is missing.
+
 Creating Fedora/RHEL/CentOS appliances under Ubuntu won't work.
 
 ## Copyright
