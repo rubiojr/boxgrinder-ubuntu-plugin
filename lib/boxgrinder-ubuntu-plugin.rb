@@ -6,7 +6,7 @@ module BoxGrinder
   class UbuntuPlugin < BasePlugin
     def after_init
       register_deliverable(
-          :disk => "#{@appliance_config.name}-sda.raw"
+          :disk => "#{@appliance_config.name}-sda.qcow2"
       )
       register_supported_os('ubuntu', ["natty"])
     end
@@ -16,7 +16,7 @@ module BoxGrinder
     end
 
     def validate
-      set_default_config_value('format', 'raw')
+      set_default_config_value('format', 'qcow2')
     end
 
     def create_files_map
@@ -54,19 +54,24 @@ module BoxGrinder
       if create_files_map
         extra_args << "--copy #{@dir.tmp + '/filelist'}"
       end
-      extra_args << '--quiet'
       extra_args << "--part #{create_partitions_file}"
       extra_args << "--rootpass #{@appliance_config.os.password}"
+      if ENV["BOXGRINDER_DEBUG_VMBUILDER"]
+        extra_args << "--debug"
+      else
+        extra_args << '--quiet'
+      end
+
       begin
         @exec_helper.execute "vmbuilder kvm ubuntu #{extra_args.join(' ')} --suite #{@appliance_config.os.version} #{pkgs.join(" ")} --arch #{arch} -t '#{@dir.tmp}' -d '#{@dir.base}/out' --mem #{@appliance_config.hardware.memory} --cpus #{@appliance_config.hardware.cpus}"
         #
         # Move resulting disk image to the plugin output dir
         #
         dsource = Dir["#{@dir.base}/out/*.qcow2"].first
-        ddest = "#{@dir.base}/tmp/#{@appliance_config.name}-sda.raw"
+        ddest = "#{@dir.base}/tmp/#{@appliance_config.name}-sda.qcow2"
         @log.debug "Moving qcow2 disk image from #{dsource} to #{ddest}"
-        # Convert to RAW
-        @exec_helper.execute "qemu-img convert #{dsource} -O raw #{ddest}"
+        FileUtils.mv dsource, ddest
+        @log.debug "Ubuntu appliance ready"
       rescue => e
       ensure
         #
@@ -77,7 +82,6 @@ module BoxGrinder
         #
         if not ENV["BOXGRINDER_DEBUG_NOCLEAN"]
           @log.debug "Cleaning tmp/work directories"
-          FileUtils.rm_rf "#{@dir.tmp}" if File.exist? "#{@dir.tmp}"
           FileUtils.rm_rf "#{@dir.base}/out" if File.exist? "#{@dir.base}/out"
         end
       end
