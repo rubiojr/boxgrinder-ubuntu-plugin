@@ -55,7 +55,13 @@ There are no binary packages for the libguestfs ruby bindings ATM. Grab the gem 
 There's a sample appliance definition at:
 
 https://github.com/rubiojr/boxgrinder-appliances/tree/master/ubuntu-natty
-    
+
+## Caveats
+
+The Ubuntu plugin is still in alpha stage. If you find issues with it, please mailme, open an issue or submit a pull request ;)
+
+Creating Fedora/RHEL/CentOS appliances under Ubuntu won't work.
+
 ## Copyright
 
 Copyright (c) 2011 Sergio Rubio. See LICENSE.txt for
