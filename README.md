@@ -33,7 +33,7 @@ Remove not required packages:
 
 Install libguestfs packages:
 
-    $ dpkg -i guestmount* libguestfs* python-guestfs* febootstrap*
+    $ sudo dpkg -i guestmount* libguestfs* python-guestfs* febootstrap*
 
 **Install guestfs rubygem**
 
