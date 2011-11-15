@@ -36,7 +36,6 @@ module BoxGrinder
     end
     
     def create_partitions_file
-      pcount = 1
       plist = File.open(@dir.tmp + "/partitions", 'w') do |pl|
         @log.debug "Creting partition map  #{@dir.tmp + '/partitions'}"
         @appliance_config.hardware.partitions.each do |mpoint, values|
@@ -44,6 +43,25 @@ module BoxGrinder
         end
       end
       @dir.tmp + "/partitions"
+    end
+
+    def create_commands_file
+      commands_file = @dir.tmp + "/commands"
+      unless @appliance_config.post['base'].nil?
+        clist = File.open(commands_file, 'w') do |cl| 
+          cl.puts "#!/bin/sh"
+          @log.info "Executing post operations after build..."
+          @appliance_config.post['base'].each do |cmd|
+            cl.puts "chroot $1 #{cmd}"
+          end
+          @log.debug "Post commands from appliance definition file executed."
+        end
+        File.chmod(0744, commands_file)
+        return commands_file
+      else
+        @log.debug "No commands specified, skipping."
+        return nil
+      end
     end
 
     def execute_vmbuilder
@@ -56,6 +74,10 @@ module BoxGrinder
       end
       extra_args << "--part #{create_partitions_file}"
       extra_args << "--rootpass #{@appliance_config.os.password}"
+      commands_file = create_commands_file
+      if commands_file
+        extra_args << "--exec=#{commands_file}"
+      end
       if ENV["BOXGRINDER_DEBUG_VMBUILDER"]
         extra_args << "--debug"
       else
