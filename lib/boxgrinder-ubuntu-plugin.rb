@@ -49,12 +49,12 @@ module BoxGrinder
       commands_file = @dir.tmp + "/commands"
       unless @appliance_config.post['base'].nil?
         clist = File.open(commands_file, 'w') do |cl| 
+          @log.debug "Creating Post commands script."
           cl.puts "#!/bin/sh"
-          @log.info "Executing post operations after build..."
           @appliance_config.post['base'].each do |cmd|
+            @log.debug "Adding command chroot $1 #{cmd} to script."
             cl.puts "chroot $1 #{cmd}"
           end
-          @log.debug "Post commands from appliance definition file executed."
         end
         File.chmod(0744, commands_file)
         return commands_file
