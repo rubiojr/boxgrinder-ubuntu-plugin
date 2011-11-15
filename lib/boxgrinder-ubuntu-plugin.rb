@@ -8,7 +8,7 @@ module BoxGrinder
       register_deliverable(
           :disk => "#{@appliance_config.name}-sda.qcow2"
       )
-      register_supported_os('ubuntu', ["natty"])
+      register_supported_os('ubuntu', ["lucid", "maveric", "natty", "oneiric"])
     end
 
     def execute(appliance_definition_file)
