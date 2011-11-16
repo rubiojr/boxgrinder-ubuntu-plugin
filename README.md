@@ -52,9 +52,9 @@ There are no binary packages for the libguestfs ruby bindings ATM. Grab the gem 
 
     boxgrinder-build -l boxgrinder-ubuntu-plugin ubuntu.appl
 
-There's a sample appliance definition at:
+There are sample appliance  definitions at:
 
-https://github.com/rubiojr/boxgrinder-appliances/tree/master/ubuntu-natty
+https://github.com/rubiojr/boxgrinder-appliances
 
 ## DEV TIPS ##
 Environment variables useful to debug the plugin:
