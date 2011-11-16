@@ -56,6 +56,15 @@ There's a sample appliance definition at:
 
 https://github.com/rubiojr/boxgrinder-appliances/tree/master/ubuntu-natty
 
+## DEV TIPS ##
+Environment variables useful to debug the plugin:
+
+* BOXGRINDER_DEBUG_NOCLEAN=1
+Do not clean vmbuilder output.
+
+* BOXGRINDER_DEBUG_VMBUILDER=1
+Print all the output from vmbuilder while running.
+
 ## Caveats
 
 The Ubuntu plugin is still in alpha stage. If you find issues with it, please mailme, open an issue or submit a pull request ;)

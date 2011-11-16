@@ -1,2 +1,5 @@
+Wed Nov 16 11:44:19 CET 2011 - 0.2.2
+* Enable universe,multiverse components when creating the appliance
+
 Tue Nov 15 10:53:00 CET 2011 - 0.2
 * Initial support for 'post:' in appliance definition file

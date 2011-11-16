@@ -83,7 +83,8 @@ module BoxGrinder
       else
         extra_args << '--quiet'
       end
-
+      extra_args << "--components=main,restricted,universe,multiverse"
+     
       begin
         @exec_helper.execute "vmbuilder kvm ubuntu #{extra_args.join(' ')} --suite #{@appliance_config.os.version} #{pkgs.join(" ")} --arch #{arch} -t '#{@dir.tmp}' -d '#{@dir.base}/out' --mem #{@appliance_config.hardware.memory} --cpus #{@appliance_config.hardware.cpus}"
         #
