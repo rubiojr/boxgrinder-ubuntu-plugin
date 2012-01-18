@@ -4,9 +4,19 @@ This Boxgrinder OS plugin adds Ubuntu support to boxgrinder.
 
 The plugin requires Ubuntu-specific tools to create the appliance so it will only work with Ubuntu as the host OS. 
 
-Boxgrinder can be easily installed in Ubuntu via rubygems.
+Boxgrinder can be easily installed in Ubuntu via packages in Ubuntu Precise, or via rubygems in Oneiric.
 
-## Pre-requisites
+## Installing in Ubuntu Precise (12.04)
+
+    sudo apt-add-repository ppa:rubiojr/boxgrinder-stable
+    sudo apt-get update
+    sudo apt-get install rubygems boxgrinder-build
+
+That's it, Boxgrinder is ready to be used. Get some Ubuntu appliance definitions from http://github.com/rubiojr/boxgrinder-appliances.
+
+## Installing in Ubuntu Oneiric (11.10)
+
+### Pre-requisites
 
 **Install libguestfs binary packages**
 
