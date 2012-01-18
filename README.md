@@ -14,7 +14,15 @@ Boxgrinder can be easily installed in Ubuntu via packages in Ubuntu Precise, or 
 
 That's it, Boxgrinder is ready to be used. Get some Ubuntu appliance definitions from http://github.com/rubiojr/boxgrinder-appliances.
 
+**IMPORTANT**
+
+You'll need a little fix for vm-builder do to an upstream bug. Relevant info in the bug comments:
+
+https://bugs.launchpad.net/ubuntu/+source/vm-builder/+bug/911704
+
 ## Installing in Ubuntu Oneiric (11.10)
+
+Installation in Oneiric is a little bit more elaborate.
 
 ### Pre-requisites
 
