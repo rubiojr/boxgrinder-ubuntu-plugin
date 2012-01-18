@@ -4,6 +4,8 @@ require 'boxgrinder-core/errors'
 
 module BoxGrinder
   class UbuntuPlugin < BasePlugin
+    plugin :type => :os, :name => :ubuntu, :full_name  => "Ubuntu", :versions   => ["lucid", "maveric", "natty", "oneiric", "precise"]
+
     def after_init
       register_deliverable(
           :disk => "#{@appliance_config.name}-sda.qcow2"
@@ -118,6 +120,3 @@ module BoxGrinder
 
   end
 end
-
-plugin :class => BoxGrinder::UbuntuPlugin, :type => :os, :name => :ubuntu, :full_name => "Ubuntu", :versions => ["lucid", "maveric", "natty", "oneiric"]
-
