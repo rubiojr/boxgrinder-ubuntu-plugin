@@ -4,7 +4,7 @@ require 'boxgrinder-core/errors'
 
 module BoxGrinder
   class UbuntuPlugin < BasePlugin
-    plugin :type => :os, :name => :ubuntu, :full_name  => "Ubuntu", :versions   => ["lucid", "maveric", "natty", "oneiric", "precise"]
+    plugin :type => :os, :name => :ubuntu, :full_name  => "Ubuntu", :versions   => ["lucid", "maveric", "natty", "oneiric", "precise"], :require_root => true
 
     def after_init
       register_deliverable(
