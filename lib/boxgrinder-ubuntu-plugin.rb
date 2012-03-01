@@ -80,11 +80,8 @@ module BoxGrinder
       if commands_file
         extra_args << "--exec=#{commands_file}"
       end
-      if ENV["BOXGRINDER_DEBUG_VMBUILDER"]
-        extra_args << "--debug"
-      else
-        extra_args << '--quiet'
-      end
+      
+      extra_args << "--debug"
       extra_args << "--components=main,restricted,universe,multiverse"
      
       begin
