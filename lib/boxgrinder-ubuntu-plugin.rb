@@ -69,6 +69,7 @@ module BoxGrinder
     def execute_vmbuilder
       arch = @appliance_config.hardware.arch
       arch = 'amd64' if  arch == 'x86_64'
+      arch = 'i386' if  arch == 'i686'
       pkgs = @appliance_config.packages.map { |p| "--addpkg #{p}" }
       extra_args = []
       if create_files_map
